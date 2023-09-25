@@ -1,0 +1,144 @@
+h1,
+h2,
+h3 {
+    color: rgb(64, 4, 84);
+    letter-spacing: 1px;
+}
+
+h1,
+h2,
+h3 {
+    color: rgb(226, 80, 17);
+    letter-spacing: 1px;
+}
+
+nav {
+    color: rgb(21, 21, 251);
+    text-align: right;
+    text-decoration: none;
+}
+
+p {
+    color: rgb(32, 211, 208);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+a:visited {
+    color: blue;
+}
+
+a:hover {
+    color: rgb(249, 215, 66);
+}
+
+a {
+    text-decoration: none;
+}
+
+.type {
+    color: rgb(73, 103, 9);
+}
+
+span {
+    color: rgb(57, 224, 174);
+}
+
+/*
+figure {
+    text-align: left;
+}
+
+img {
+    float: left;
+    margin-left: 50px:
+}*/
+div p {
+    display: none;
+    color: dimgrey;
+    background-color: chartreuse;
+    padding: 20px;
+}
+
+div:hover p {
+    display: block;
+}
+
+#hover {
+    color: blueviolet;
+}
+
+::selection {
+    background-color: #b5e2fa;
+}
+
+div p::first-letter {
+    font-weight: bold;
+    color: red;
+}
+
+h3+div::after {
+    content: "-- Safe Use";
+    font-weight: bold;
+    color: white;
+    background-color: red;
+}
+
+.highlight::after {
+    content: "-- Don't Use";
+    font-weight: bold;
+    color: white;
+    background-color: red;
+}
+
+.search {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px solid black;
+    margin: 20px;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px;
+
+}
+
+section div {
+    width: 100px;
+    height: 100px;
+    background-color: cadetblue;
+    margin: 50px;
+    transition: margin-left 3s;
+
+}
+
+section:hover div {
+    background-color: darkorchid;
+    margin-left: 1000px;
+    border-radius: 50%;
+}
+
+div:nth-of-type(1) {
+    transition-timing-function: steps(6, end);
+
+}
+
+div:nth-of-type(2) {
+    transition-timing-function: ease-out;
+}
+
+div:nth-of-type(3) {
+    transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+
+}
+
+div:nth-of-type(4) {
+    transition-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1620331314222-c1cf9a9dbba4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGhhaXIlMjBkcnllcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
