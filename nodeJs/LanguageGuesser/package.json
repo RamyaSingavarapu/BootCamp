@@ -1,0 +1,17 @@
+{
+  "name": "languageguesser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "\"Ramya\"",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "franc": "^5.0.0",
+    "lang": "^0.1.1",
+    "langs": "^2.0.0"
+  }
+}
