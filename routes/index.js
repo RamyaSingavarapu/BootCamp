@@ -17,6 +17,11 @@ app.get('/r/:subreddit/:postId', (req, res) => {
     const { subreddit, postId } = req.params;
     res.send(`Hello from the ${subreddit} page with ${postId} id`);
 })
+app.get('/search', (req, res) => {
+    const { q } = req.query;
+    const { color } = req.query;
+    res.send(`<h1>Search results for:${q} with color:${color}</h1>`);
+})
 
 app.get('*', (req, res) => {
     res.send("SORRY!! WE CANNOT FIND THE PATH");
