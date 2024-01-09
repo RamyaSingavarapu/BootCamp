@@ -1,4 +1,8 @@
-<h1>Your Random Number: <%= random %>
-</h1>
-<h2>That number is <%=random % 2==0 ? 'EVEN' : 'ODD' %>
-</h2>
+<%- include('partials/head') %>
+
+    <%- include('partials/navbar') %>
+        <h1>Your Random Number: <%= random %>
+        </h1>
+        <h2>That number is <%=random % 2==0 ? 'EVEN' : 'ODD' %>
+        </h2>
+        <%- include('partials/footer') %>
