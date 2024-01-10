@@ -28,6 +28,6 @@ app.get('/r/:subreddit', (req, res) => {
     }
 
 })
-app.listen(9000, () => {
+app.listen(3030, () => {
     console.log("LISTENING ON PORT 3030");
 })
