@@ -3,11 +3,10 @@ const app = express();
 const path = require('path');
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 app.set('views', path.join(__dirname, '/views'));
 app.get('/tacos', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/restDemo.html'))
-    //res.send("response for /get request")
-
 })
 app.post('/tacos', (req, res) => {
     const { meat, qty } = req.body;
