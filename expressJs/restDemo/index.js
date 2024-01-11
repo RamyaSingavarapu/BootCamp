@@ -3,23 +3,22 @@ const app = express();
 const path = require('path');
 const comments = [
     {
-        name: "Todd",
+        username: "Todd",
         comment: "lol that is so funny!"
     },
     {
-        name: "Skyler",
+        username: "Skyler",
         comment: "Id like to go bird watching with my dog"
     },
     {
-        name: "sk79gsl",
+        username: "sk79gsl",
         comment: "Please delete your account! Todd"
     },
     {
-        name: "onlysayswoof",
+        username: "onlysayswoof",
         comment: "woof woof woof"
     }
 ]
-
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.urlencoded({ extended: true }))
@@ -27,7 +26,14 @@ app.use(express.json());
 app.set('views', path.join(__dirname, '/views'));
 app.get('/comments', (req, res) => {
     res.render('comments/index', { comments })
-
+})
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new')
+})
+app.post('/comments', (req, res) => {
+    const { username, comment } = req.body
+    comments.push({ username, comment })
+    res.render('comments/postComments')
 })
 app.get('/tacos', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/restDemo.html'))
