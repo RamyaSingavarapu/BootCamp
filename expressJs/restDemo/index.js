@@ -33,7 +33,7 @@ app.get('/comments/new', (req, res) => {
 app.post('/comments', (req, res) => {
     const { username, comment } = req.body
     comments.push({ username, comment })
-    res.render('comments/postComments')
+    res.redirect('/comments')
 })
 app.get('/tacos', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/restDemo.html'))
