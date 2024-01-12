@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const { v4: uuid } = require('uuid');//set uuid = (require('uuid')).v4 (i.e)v4 version of uuid
-const comments = [
+let comments = [
     {
         id: uuid(),
         username: "Todd",
@@ -57,6 +57,11 @@ app.patch('/comments/:id', (req, res) => {
     const newText = req.body.comment;
     const foundComment = comments.find(c => c.id === id)
     foundComment.comment = newText;
+    res.redirect('/comments');
+})
+app.delete('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    comments = comments.filter(c => c.id != id);
     res.redirect('/comments');
 })
 app.get('/tacos', (req, res) => {
