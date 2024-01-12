@@ -45,6 +45,13 @@ app.get('/comments/:id', (req, res) => {
     const comment = comments.find(c => c.id === id);//finds matching array element(i.e object)
     res.render('comments/show', { comment }) // {comment}= passing an comment object
 })
+app.patch('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const newText = req.body.comment;
+    const foundComment = comments.find(c => c.id === id)
+    foundComment.comment = newText;
+    res.redirect('/comments');
+})
 app.get('/tacos', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/restDemo.html'))
 })
