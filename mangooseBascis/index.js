@@ -11,5 +11,14 @@ const movieSchema = new mongoose.Schema({
     score: Number,
     rating: 'String'
 })
-const movie = mongoose.model('Movie', movieSchema);
-const amadeus = new movie({ title: 'Amadeus', year: 1986, score: 9.2, rating: 'R' });
+const Movie = mongoose.model('Movie', movieSchema);
+//const amadeus = new movie({ title: 'Amadeus', year: 1986, score: 9.2, rating: 'R' });
+Movie.insertMany([
+    { title: 'Bahubali', year: 2020, score: 9.4, rating: 'E' },
+    { title: 'Magadheera', year: 2018, score: 9.1, rating: 'R' },
+    { title: 'salaar', year: 2023, score: 9.0, rating: 'X' }
+]).then(() => {
+    console.log("It Worked!!");
+}).catch(() => {
+    console.log(e);
+})
