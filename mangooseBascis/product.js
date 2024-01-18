@@ -37,8 +37,42 @@ var productSchema = new mongoose.Schema({
         enum: ['S', 'M', 'L']
     }
 })
+
+
+//var bike = new Product({ name: 'RoyalEnfield', price: 500, categories: ['cycling', 'riding'], //onSale: 0, qty: { online: 0, inStore: 0 } })
+/*bike.save().then((data) => {
+    console.log("IT WORKED")
+    console.log(data)
+}).catch((err) => {
+    console.log("OH NO ERROR")
+    console.log(err)
+})*/
+productSchema.methods.toggleOnSale = function () {
+    this.onSale = !this.onSale;
+    return this.save();
+}
+
+productSchema.methods.newCategory = function (newCat) {
+    this.categories.push(newCat);
+    return this.save();
+}
 var Product = mongoose.model('Product', productSchema);
-//var bike = new Product({ name: 'RoyalEnfield', price: 500, categories: ['cycling', 'riding'], onSale: 0, qty: { online: 0, inStore: 0 } })
+
+
+const findProduct = async () => {
+    const foundProduct = await Product.findOne({ name: "Audi" });
+    console.log(foundProduct);
+    await foundProduct.toggleOnSale();
+    console.log(foundProduct);
+    await foundProduct.newCategory("Outdoor");
+    console.log(foundProduct);
+
+}
+findProduct();
+
+
+
+
 //var pump = new Product({ name: 'TyrePump', price: 20 })
 //pump.save()
 /*Product.findOneAndUpdate({ name: 'TyrePump' }, { price: -20 }, { new: true, runValidators: true }).then((data) => {
@@ -48,11 +82,12 @@ var Product = mongoose.model('Product', productSchema);
     console.log("OH NO ERROR")
     console.log(err)
 })*/
-var car = new Product({ name: 'Audi', price: 15000, size: 'Xs' })
+
+/*var car = new Product({ name: 'Audi', price: 15000, size: 'Xs' })
 car.save().then((data) => {
     console.log("IT WORKED")
     console.log(data)
 }).catch((err) => {
     console.log("OH NO ERROR")
     console.log(err)
-})
+})*/
