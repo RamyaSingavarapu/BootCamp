@@ -33,8 +33,10 @@ var productSchema = new mongoose.Schema({
     }
 })
 var Product = mongoose.model('Product', productSchema);
-var bike = new Product({ name: 'RoyalEnfield', price: 500, categories: ['cycling', 'riding'], onSale: 0, qty: { online: 0, inStore: 0 } })
-bike.save().then((data) => {
+//var bike = new Product({ name: 'RoyalEnfield', price: 500, categories: ['cycling', 'riding'], onSale: 0, qty: { online: 0, inStore: 0 } })
+var pump = new Product({ name: 'TyrePump', price: 20 })
+pump.save()
+Product.findOneAndUpdate({ name: 'TyrePump' }, { price: -20 }, { new: true, runValidators: true }).then((data) => {
     console.log("IT WORKED")
     console.log(data)
 }).catch((err) => {
