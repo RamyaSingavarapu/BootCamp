@@ -56,6 +56,11 @@ productSchema.methods.newCategory = function (newCat) {
     this.categories.push(newCat);
     return this.save();
 }
+
+productSchema.statics.fireSale = function () {
+    return this.updateMany({}, { price: 100, onSale: true })
+
+}
 var Product = mongoose.model('Product', productSchema);
 
 
@@ -66,8 +71,8 @@ const findProduct = async () => {
     console.log(foundProduct);
     await foundProduct.newCategory("Outdoor");
     console.log(foundProduct);
-
 }
+Product.fireSale().then((res) => console.log(res))
 findProduct();
 
 
