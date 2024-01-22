@@ -6,24 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= foundProduct.name %>
+        <%= product.name %>
     </title>
 </head>
 
 <body>
     <h1>
-        <%= foundProduct.name %>
+        <%= product.name %>
     </h1>
 
     <ul>
         <li>
-            price: <%= foundProduct.price %>
+            price: <%= product.price %>
         </li>
         <li>
-            category: <%= foundProduct.category %>
+            category: <%= product.category %>
         </li>
     </ul>
     <a href="/products">All Products</a>
+    <a href="/products/<%= product.id %>/edit">Edit Products</a>
+
 
 </body>
 
