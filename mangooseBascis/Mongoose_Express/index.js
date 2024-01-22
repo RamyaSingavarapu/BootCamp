@@ -17,7 +17,15 @@ app.set('view engine', 'ejs')
 
 app.get('/products', async (req, res) => {
     const products = await Product.find({});
-    res.render('index', { products })
+    res.render('products/index', { products })
+})
+
+app.get('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const foundProduct = await Product.findById(id);
+    console.log(foundProduct)
+    res.render('products/show', { foundProduct })
+
 })
 
 app.listen(3000, () => {
