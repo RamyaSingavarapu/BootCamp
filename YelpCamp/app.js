@@ -21,10 +21,16 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/campground', async (req, res) => {
+app.get('/campgrounds', async (req, res) => {
     const campground = await Campground.find({});
     res.render('campgrounds/index', { campground });
+})
 
+app.get('/campgrounds/:id', async (req, res) => {
+    const { id } = req.params;
+    const campground = await Campground.findById({ _id: id });
+    console.log(campground);
+    res.render('campgrounds/show', { campground });
 })
 
 app.listen(2000, () => {
