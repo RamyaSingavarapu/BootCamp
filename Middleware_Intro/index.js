@@ -10,6 +10,11 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use('/chicken', (req, res, next) => {
+    console.log('I LOVE CHICKEN');
+    next();
+})
+
 // app.use((req, res, next) => {
 //     console.log("THIS IS MY FIRST MIDDLE WARE");
 //     next();
@@ -33,6 +38,10 @@ app.get('/', (req, res) => {
 app.get('/chicken', (req, res) => {
     console.log(req.requestTime);
     res.send('chick chick');
+})
+
+app.use((req, res) => {
+    res.status(404).send('NOT FOUND');
 })
 
 app.listen(1000, () => {
