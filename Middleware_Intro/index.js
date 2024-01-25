@@ -15,6 +15,15 @@ app.use('/chicken', (req, res, next) => {
     next();
 })
 
+const verifyPassword = (req, res, next) => {
+    const { password } = req.query;
+    if (password == 'chickennugget') {
+        next();
+    } else {
+        res.send('SORRY!! YOU NEED A PASSWORD TO ACCESS IT');
+    }
+}
+
 // app.use((req, res, next) => {
 //     console.log("THIS IS MY FIRST MIDDLE WARE");
 //     next();
@@ -38,6 +47,10 @@ app.get('/', (req, res) => {
 app.get('/chicken', (req, res) => {
     console.log(req.requestTime);
     res.send('chick chick');
+})
+
+app.get('/secret', verifyPassword, (req, res) => {
+    res.send('MY SECRET IS: Sometimes I wear a headphones in public so I dont have talk to anyone');
 })
 
 app.use((req, res) => {
