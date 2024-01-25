@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('/layouts/boilerplate') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit</title>
-</head>
 
-<body>
     <h1>Update Campground</h1>
     <form action='/campgrounds/<%= campground._id %>?_method=PUT' method="POST">
-        <div>
+        <section>
             <label for="name">Title</label>
             <input type="text" id="name" name="campground[title]" value="<%= campground.title %>">
-        </div>
-        <div>
+        </section>
+        <section>
             <label for="location">location</label>
             <input type="text" id="location" name="campground[location]" value="<%= campground.location %>">
-        </div>
+        </section>
         <button>Update campground</button>
     </form>
     <footer>
         <a href="/campgrounds">Back</a>
         <a href="/campgrounds/<%= campground._id %>">Cancel</a>
     </footer>
-
-</body>
