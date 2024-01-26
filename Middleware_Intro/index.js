@@ -53,6 +53,15 @@ app.get('/secret', verifyPassword, (req, res) => {
     res.send('MY SECRET IS: Sometimes I wear a headphones in public so I dont have talk to anyone');
 })
 
+app.use((err, req, res, next) => {
+    console.log('********************************');
+    console.log('**********ERROR*********');
+    console.log('********************************');
+    console.log(err);
+    res.status(500).send('OH NO!! ERROR');
+    next(err);
+})
+
 app.use((req, res) => {
     res.status(404).send('NOT FOUND');
 })
