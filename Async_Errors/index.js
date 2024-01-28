@@ -21,9 +21,14 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
+function wrapAsync(fn) {
+    return function (req, res, next) {
+        fn(req, res, next).catch(e => next(e));
+    }
+}
+
 
 app.get('/products', async (req, res) => {
-
     const { category } = req.query;
     if (category) {
         const products = await Product.find({ category });
@@ -40,7 +45,7 @@ app.get('/products/new', (req, res) => {
 })
 
 
-app.post('/products', async (req, res, next) => {
+app.post('/products', wrapAsync(async (req, res, next) => {
     try {
         const newProduct = new Product(req.body);
         await newProduct.save();
@@ -49,11 +54,9 @@ app.post('/products', async (req, res, next) => {
     catch (e) {
         next(e);
     }
+}))
 
-
-})
-
-app.get('/products/:id', async (req, res, next) => {
+app.get('/products/:id', wrapAsync(async (req, res, next) => {
     try {
         const { id } = req.params;
         const product = await Product.findById(id);
@@ -65,10 +68,9 @@ app.get('/products/:id', async (req, res, next) => {
     catch (e) {
         next(e);
     }
+}))
 
-})
-
-app.get('/products/:id/edit', async (req, res, next) => {
+app.get('/products/:id/edit', wrapAsync(async (req, res, next) => {
     try {
         const { id } = req.params;
         const product = await Product.findById(id);
@@ -77,9 +79,9 @@ app.get('/products/:id/edit', async (req, res, next) => {
     catch (e) {
         next(e);
     }
-})
+}))
 
-app.put('/products/:id', async (req, res, next) => {
+app.put('/products/:id', wrapAsync(async (req, res, next) => {
     try {
         const { id } = req.params;
         const product = await Product.findOneAndUpdate({ _id: id }, req.body, { runValidators: true });
@@ -88,13 +90,13 @@ app.put('/products/:id', async (req, res, next) => {
     catch (e) {
         next(e);
     }
-})
+}))
 
-app.delete('/products/:id', async (req, res) => {
+app.delete('/products/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const deleteProduct = await Product.findByIdAndDelete(id);
     res.redirect('/products');
-})
+}))
 
 app.use((err, req, res, next) => {
     const { status = 404 } = err;
