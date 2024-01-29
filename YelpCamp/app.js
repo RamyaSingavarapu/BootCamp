@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+const catchAsync = require('./utils/catchAsync');
+const expressError = require('./utils/expressError');
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
@@ -35,34 +37,46 @@ app.get('/campgrounds/new', (req, res) => {
     res.render('campgrounds/new');
 })
 
-app.post('/campgrounds', async (req, res) => {
+app.post('/campgrounds', catchAsync(async (req, res) => {
+    if (!req.body.campground) throw new expressError('request body not found', 400)
     const campground = new Campground(req.body.campground);
     await campground.save();
     res.redirect(`/campgrounds/${campground._id}`);
-})
 
-app.get('/campgrounds/:id', async (req, res) => {
+}))
+
+app.get('/campgrounds/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById({ _id: id });
     res.render('campgrounds/show', { campground });
-})
+}))
 
-app.get('/campgrounds/:id/edit', async (req, res) => {
+app.get('/campgrounds/:id/edit', catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById({ _id: id });
     res.render('campgrounds/edit', { campground });
-})
+}))
 
-app.put('/campgrounds/:id', async (req, res) => {
+app.put('/campgrounds/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
     res.redirect(`/campgrounds/${campground._id}`)
-})
+}))
 
 app.delete('/campgrounds/:id', async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete({ _id: id });
     res.redirect('/campgrounds');
+})
+
+app.all('*', (req, res, next) => {
+    next(new expressError('Page not found!!', 404))
+})
+
+app.use((err, req, res, next) => {
+    const { status = 500 } = err;
+    if (!err.message) err.message = 'oh boy!! Something went wrong';
+    res.status(status).render('error', { err })
 })
 
 app.listen(2000, () => {
