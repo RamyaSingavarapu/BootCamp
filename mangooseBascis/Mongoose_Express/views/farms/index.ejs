@@ -12,15 +12,17 @@
     <h1>
         ALL FARMS!!
     </h1>
-    <% for(let farm of farms){ %>
-        <ul>
+    <ul>
+        <% for(let farm of farms){ %>
             <li>
-                <%= farm.name %>
+                <a href="/farms/<%= farm._id %>">
+                    <%= farm.name %>
+                </a>
             </li>
-        </ul>
-        <% } %>
-            <a href="/farms/new">Create Product</a>
-            <!-- <a href="/farms">All Products!!!</a> -->
+            <% } %>
+    </ul>
+    <a href="/farms/new">Create Product</a>
+
 </body>
 
 </html>
