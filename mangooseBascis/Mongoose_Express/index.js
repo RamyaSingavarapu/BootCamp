@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 var mongoose = require('mongoose');
+const Farm = require('./models/farm');
 const Product = require('./models/product');
 const methodOverride = require('method-override');
 
 var categories = ['fruit', 'vegetable', 'dairy', 'bakedgoods'];
 
-mongoose.connect('mongodb://127.0.0.1:27017/farmStand').then(() => {
+mongoose.connect('mongodb://127.0.0.1:27017/farmStandTake2').then(() => {
     console.log("MONGO Connection Open!!")
 }).catch((m) => {
     console.log("OH NO MONGO CONNECTION ERROR!!");
@@ -20,6 +21,26 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
+//Farm Routes
+
+app.get('/farms', async (req, res) => {
+    const farms = await Farm.find({});
+    res.render('farms/index', { farms })
+})
+
+app.get('/farms/new', (req, res) => {
+    res.render('farms/new');
+})
+
+app.post('/farms', async (req, res) => {
+    const farm = new Farm(req.body);
+    await farm.save();
+    res.redirect('/farms');
+})
+
+
+
+//Product Routes
 
 app.get('/products', async (req, res) => {
     const { category } = req.query;
@@ -69,6 +90,6 @@ app.delete('/products/:id', async (req, res) => {
     res.redirect('/products');
 })
 
-app.listen(3000, () => {
-    console.log("LISTENING ON PORT 3000");
+app.listen(1112, () => {
+    console.log("LISTENING ON PORT 1112");
 })
