@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
+const Review = require('./models/reviews');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const { campgroundSchema } = require('./schemas.js')
@@ -78,6 +79,15 @@ app.delete('/campgrounds/:id', async (req, res) => {
     await Campground.findByIdAndDelete({ _id: id });
     res.redirect('/campgrounds');
 })
+
+app.post('/campgrounds/:id/reviews', catchAsync(async (req, res) => {
+    const campground = await Campground.findById(req.params.id);
+    const review = new Review(req.body.review);
+    campground.reviews.push(review);
+    await review.save();
+    await campground.save();
+    res.redirect(`/campgrounds/${campground._id}`);
+}))
 
 app.all('*', (req, res, next) => {
     next(new expressError('Page not found!!', 404))
