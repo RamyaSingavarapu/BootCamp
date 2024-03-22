@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const session = require('express-session');
-
+const flash = require('connect-flash');
 const path = require('path');
 const mongoose = require('mongoose');
 const Review = require('./models/reviews');
@@ -25,6 +25,13 @@ const sessionConfig = {
     }
 }
 app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
