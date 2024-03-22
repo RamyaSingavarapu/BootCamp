@@ -1,13 +1,30 @@
 const express = require('express');
 const app = express();
+
+const session = require('express-session');
+
 const path = require('path');
 const mongoose = require('mongoose');
 const Review = require('./models/reviews');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews')
 const ExpressError = require('./utils/expressError');
+
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+
+    }
+}
+app.use(session(sessionConfig));
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
