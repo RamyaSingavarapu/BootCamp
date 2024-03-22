@@ -12,6 +12,11 @@ const sessionOptions = { secret: 'thisisnotagoodsecret', resave: false, saveUnin
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use((req, res, next) => {
+    res.locals.messages = req.flash('success');
+    next();
+})
+
 var categories = ['fruit', 'vegetable', 'dairy', 'bakedgoods'];
 
 mongoose.connect('mongodb://127.0.0.1:27017/farmStandTake2').then(() => {
@@ -31,7 +36,7 @@ app.use(methodOverride('_method'));
 
 app.get('/farms', async (req, res) => {
     const farms = await Farm.find({});
-    res.render('farms/index', { farms, messages: req.flash('success') })
+    res.render('farms/index', { farms })
 })
 
 app.get('/farms/new', (req, res) => {
