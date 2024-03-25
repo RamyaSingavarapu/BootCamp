@@ -20,8 +20,13 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
     res.send('THIS IS THE HOME PAGE');
 })
+
 app.get('/register', (req, res) => {
     res.render('register');
+})
+
+app.get('/login', (req, res) => {
+    res.render('login');
 })
 
 app.post('/register', async (req, res) => {
@@ -34,6 +39,20 @@ app.post('/register', async (req, res) => {
     await user.save();
     res.redirect('/');
 })
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (validPassword) {
+        res.send('YAY!! WELCOME');
+    }
+    else {
+        res.send('TRY AGAIN');
+    }
+})
+
+
 
 app.get('/secret', (req, res) => {
     res.send('THIS IS A SECRET!! CANNOT SEE ME UNLESS YOU ARE LOGGED IN');
