@@ -18,6 +18,8 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./models/user');
 
+
+
 const sessionConfig = {
     secret: 'thisshouldbeabettersecret',
     resave: false,
@@ -56,16 +58,16 @@ db.once("open", () => {
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
+
+app.use(methodOverride('_method'));
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
 
+app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
-app.use('/', userRoutes)
+
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 
 app.get('/', (req, res) => {
