@@ -5,22 +5,23 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
 const mongoose = require('mongoose');
+
 const Review = require('./models/reviews');
+const User = require('./models/user');
+
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users');
+
 const ExpressError = require('./utils/expressError');
 
 const passport = require('passport');
 const localStrategy = require('passport-local');
-const User = require('./models/user');
 
-
-
-const sessionConfig = {
+app.use(session({
     secret: 'thisshouldbeabettersecret',
     resave: false,
     saveUninitialized: true,
@@ -28,10 +29,9 @@ const sessionConfig = {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
-
     }
-}
-app.use(session(sessionConfig));
+}));
+
 app.use(flash());
 
 app.use(passport.initialize());
@@ -76,7 +76,8 @@ app.get('/', (req, res) => {
 
 
 app.all('*', (req, res, next) => {
-    next(new ExpressError('Page not found!!', 404))
+    const error = new ExpressError('Page not found!!', 404);
+    next(error)
 })
 
 app.use((err, req, res, next) => {
