@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const multer = require('multer')
+const multer = require('multer')  //Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. Multer will not process any form which is not multipart 
 const { storage } = require('../cloudinary');
 const upload = multer({ storage })
 
@@ -13,6 +13,8 @@ const Campground = require('../models/campground');
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
 
 const campgrounds = require('../controllers/campgrounds');
+
+// const uploadImages = upload.array('images'); //  uploadImages is a function that uploads an array of images
 
 router.route('/')
     .get(campgrounds.index)

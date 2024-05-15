@@ -1,16 +1,17 @@
-const express = require('express');
+//NodeJs is a program to run javascript natively(not in the browser) 
+const express = require('express');// server framework
 const app = express();
 
-const session = require('express-session');
-const flash = require('connect-flash');
+const session = require('express-session');// to maintain a consistent session
+const flash = require('connect-flash'); //library to display flash messages
 const path = require('path');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //library to connect witb mongoDB
 
 const Review = require('./models/reviews');
 const User = require('./models/user');
 
 const methodOverride = require('method-override');
-const ejsMate = require('ejs-mate');
+const ejsMate = require('ejs-mate');//template engine
 
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews')
@@ -19,7 +20,7 @@ const userRoutes = require('./routes/users');
 const ExpressError = require('./utils/expressError');
 
 const passport = require('passport');
-const localStrategy = require('passport-local');
+const localStrategy = require('passport-local');// auntentication framework to create, store, validate password credentials
 
 app.use(session({
     secret: 'thisshouldbeabettersecret',
@@ -38,8 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser()); // store modify user back to the db
+passport.deserializeUser(User.deserializeUser());// get user details from Id in the cookie
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
@@ -61,7 +62,8 @@ app.set('view engine', 'ejs');
 
 app.use(methodOverride('_method'));
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));/*Browser encodes the data sent by the user, and it posts the data to the server. This middleware decodes the encoded data which was sent by the browser. Eg: User: value=4655&name=BOB&ROB; browser:value=4655&name=BOB%26ROB;  middleware: value=4655,
+name=BOB&ROB;*/
 
 app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)

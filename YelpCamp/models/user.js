@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //Mongoose is a Node.Js-based Object Data Modeling (ODM) library for MongoDB
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 

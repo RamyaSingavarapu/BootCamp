@@ -11,13 +11,19 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="location">location</label>
+                    <label class="form-label" for="location">Location</label>
                     <input class="form-control" type="text" id="location" name="campground[location]" required>
                     <div class="valid-feedback">
                         looks good!
                     </div>
                 </div>
-                <input type="file" name="images" id="file" multiple="multiple" accept='image/*'>
+                <div class="mb-3">
+                    <div class="mb-3 custom-file">
+                        <label for="image" class="form-label">
+                            <span class="form-file-text custom-file-label">Upload image</span>
+                        </label>
+                        <input class="form-control form-control-sm" id="image" name="images" type="file" multiple>
+                      </div>
                 <div class="mb-3">
                     <label class="form-label" for="price">Campground price</label>
                     <div class="input-group">
@@ -30,13 +36,12 @@
                     <label class="form-label" for="description">Description</label>
                     <textarea class="form-control" type="text" id="description" name="campground[description]" required>
                     </textarea>
-
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-success">Add campground</button>
                 </div>
-
             </form>
             <a href="/campgrounds">Back</a>
         </div>
     </div>
+</div>
