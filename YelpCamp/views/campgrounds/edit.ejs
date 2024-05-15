@@ -15,9 +15,12 @@
                         value="<%= campground.location %>" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="images">Image Url</label>
-                    <input type="file" id="images" name="images" multiple="multiple" accept='image/*'>
-                </div>
+                    <div class="mb-3 custom-file">
+                        <label for="image" class="form-label">
+                            <span class="form-file-text custom-file-label">Upload image</span>
+                        </label>
+                        <input class="form-control form-control-sm" id="image" name="images" type="file" multiple>
+                      </div>
                 <div class="mb-3">
                     <label class="form-label" for="price">Campground price</label>
                     <div class="input-group">
