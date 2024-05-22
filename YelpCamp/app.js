@@ -1,4 +1,11 @@
 //NodeJs is a program to run javascript natively(not in the browser) 
+
+// if(process.env.NODE_ENV !== 'production'){
+//     require('dotenv').config();
+// }
+
+require('dotenv').config();
+
 const express = require('express');// server framework
 const mongoSanitize = require('express-mongo-sanitize');
 const app = express();
