@@ -24,7 +24,9 @@ const passport = require('passport');
 const localStrategy = require('passport-local');// auntentication framework to create, store, validate password credentials
 
 app.use(session({
+    name: 'session',
     secret: 'thisshouldbeabettersecret',
+    // secure:true,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -46,7 +48,6 @@ passport.serializeUser(User.serializeUser()); // store modify user back to the d
 passport.deserializeUser(User.deserializeUser());// get user details from Id in the cookie
 
 app.use((req, res, next) => {
-    console.log(req.query);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
