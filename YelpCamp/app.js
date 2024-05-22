@@ -1,5 +1,6 @@
 //NodeJs is a program to run javascript natively(not in the browser) 
 const express = require('express');// server framework
+const mongoSanitize = require('express-mongo-sanitize');
 const app = express();
 
 const session = require('express-session');// to maintain a consistent session
@@ -39,10 +40,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 
+app.use(mongoSanitize());
+
 passport.serializeUser(User.serializeUser()); // store modify user back to the db
 passport.deserializeUser(User.deserializeUser());// get user details from Id in the cookie
 
 app.use((req, res, next) => {
+    console.log(req.query);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
