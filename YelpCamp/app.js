@@ -12,6 +12,7 @@ const helmet = require('helmet');
 const app = express();
 
 const session = require('express-session');// to maintain a consistent session
+const MongoStore = require('connect-mongo');// to store sessions using mongo
 const flash = require('connect-flash'); //library to display flash messages
 const path = require('path');
 const mongoose = require('mongoose'); //library to connect witb mongoDB
@@ -25,13 +26,14 @@ const ejsMate = require('ejs-mate');//template engine
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users');
-// const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+// const dbUrl = process.env.DB_URL; If you want to work with mongo atlas 
 // mongoose.connect(dbUrl); To connect mongodb atlas
 
 // mongodb://127.0.0.1:27017/yelp-camp
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
+mongoose.connect(dbUrl);
 
 
 const db = mongoose.connection;
@@ -46,7 +48,20 @@ const ExpressError = require('./utils/expressError');
 const passport = require('passport');
 const localStrategy = require('passport-local');// auntentication framework to create, store, validate password credentials
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e);
+})
+
 app.use(session({
+    store,
     name: 'session',
     secret: 'thisshouldbeabettersecret',
     // secure:true,

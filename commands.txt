@@ -1,0 +1,1 @@
+nodemon --env-file .env ./app.js
