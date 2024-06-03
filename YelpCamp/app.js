@@ -25,6 +25,21 @@ const ejsMate = require('ejs-mate');//template engine
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users');
+// const dbUrl = process.env.DB_URL;
+// mongoose.connect(dbUrl); To connect mongodb atlas
+
+// mongodb://127.0.0.1:27017/yelp-camp
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
+
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+    console.log("Database connected");
+});
+
 
 const ExpressError = require('./utils/expressError');
 
@@ -110,14 +125,6 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 })
-
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("Database connected");
-});
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
