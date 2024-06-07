@@ -1,9 +1,9 @@
-export default function Greeter({ person, from }) {
+export default function Greeter({ person = "everyone", from = "anonymous" }) {
 
     return (
         <>
-            <h1>Hey there!{person}!! </h1>
-            <h2>-{from}</h2>
+            <h2>Hey there!{person}!! </h2>
+            <h3>-{from}</h3>
         </>
 
     )

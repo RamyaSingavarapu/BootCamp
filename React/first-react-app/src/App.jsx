@@ -6,11 +6,11 @@ import Die from "./Die"
 function App() {
   return (
     <div>
-      {/* <Greeter person="Ramya" from="Dinesh" />
-      <Greeter person="Chubby" from="Dinesh" />
-      <Greeter person="Laddu" from="Sobha" /> */}
+      <Greeter from="Dinesh" />
+      <Greeter person="Chubby" />
+      <Greeter person="Laddu" from="Mammy" />
       <Die side={20} />
-      <Die side={6} />
+      <Die />
       <Die side={10} />
     </div>
   );
