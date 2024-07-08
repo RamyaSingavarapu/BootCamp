@@ -1,0 +1,7 @@
+.PropertyList {
+    display: flex;
+}
+
+#text {
+    font-weight: bold;
+}
