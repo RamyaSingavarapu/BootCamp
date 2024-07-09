@@ -1,5 +1,6 @@
 import './App.css'
 import Clicker from "./Clicker"
+import Form from "./Form"
 import PropertyList from "./PropertyList"
 import ShoppingList from "./ShoppingList"
 // var ShoppingList = require("./ShoppingList")
@@ -31,6 +32,7 @@ const properties = [
 function App() {
   return (
     <>
+      <Form />
       <Clicker />
 
       {/* <PropertyList propertys={properties} /> */}
