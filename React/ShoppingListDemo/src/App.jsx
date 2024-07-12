@@ -4,7 +4,7 @@ import Form from "./Form"
 import Counter from "./Counter"
 import PropertyList from "./PropertyList"
 import ShoppingList from "./ShoppingList"
-import Toggler from './Toggler'
+import TogglerCounter from './TogglerCounter'
 // var ShoppingList = require("./ShoppingList")
 
 // function App() {
@@ -34,7 +34,7 @@ const properties = [
 function App() {
   return (
     <>
-      <Toggler />
+      <TogglerCounter />
       {/* <Counter num={1} /> */}
       {/* <Form />
       <Clicker /> */}
