@@ -1,6 +1,7 @@
 import { useState } from "react"
 import ShoppingListForm from "./ShoppingListForm";
 import ValidatedShoppingListForm from "./ValidatedShoppingListForm"
+import FormDemo from "./FormDemo"
 import { v4 as uuid } from "uuid"
 function ShoppingList() {
     const [items, setItems] = useState([
@@ -25,6 +26,7 @@ function ShoppingList() {
                 ))}
             </ul>
             <ValidatedShoppingListForm addItem={addItem} />
+            {/* <FormDemo /> */}
         </div>
     )
 }
