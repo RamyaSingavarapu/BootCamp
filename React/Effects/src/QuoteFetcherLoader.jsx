@@ -18,7 +18,7 @@ export default function QuoteFetcherLoader() {
 
     return (
         <div>
-            <p className="Loader" style={{ opacity: isLoading ? 1 : 0 }}>Loading...</p>
+            {isLoading && <p className="Loader" style={{ opacity: isLoading ? 1 : 0 }}>Loading...</p>}
             <h1>{quote.text}</h1>
             <h3>{quote.author}</h3>
         </div>
