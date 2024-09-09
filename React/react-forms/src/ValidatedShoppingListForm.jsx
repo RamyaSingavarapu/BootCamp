@@ -17,12 +17,13 @@ function ValidatedShoppingListForm({ addItem }) {
         } setProductIsValid(true)
     }
     const handleSubmit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if (productIsValid) {
             addItem(formData);
             setFormData({ product: "", quantity: 0 })
         }
 
+        // e.target.submit();
     }
     return (
         <form onSubmit={handleSubmit}>
