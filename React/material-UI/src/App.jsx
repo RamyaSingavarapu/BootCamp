@@ -3,6 +3,7 @@ import './App.css'
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RatingDemo from "./RatingDemo"
+import FormDemo from "./FormDemo"
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
       <Button variant="contained" startIcon={<DeleteIcon />}>Delete</Button>
 
  */}
-      <RatingDemo />
+      {/* <RatingDemo /> */}
+      <FormDemo />
 
 
     </>
