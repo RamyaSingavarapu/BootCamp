@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RatingDemo from "./RatingDemo"
 import FormDemo from "./FormDemo"
+import Navbar from "./Navbar"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
 
  */}
       {/* <RatingDemo /> */}
+      <Navbar />
       <FormDemo />
 
 
