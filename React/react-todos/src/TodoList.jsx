@@ -2,6 +2,9 @@ import { useState, useEffect } from "react"
 import List from '@mui/material/List';
 import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm"
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
 
 // const initialTodos = [
 //     { id: 1, text: "walk the dog", completed: false },
@@ -40,17 +43,27 @@ export default function TodoList() {
     }
     return (
         <>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {todos.map((todo) => (
-                    <TodoItem todo={todo}
-                        key={todo.id}
-                        removeTodo={() => removeTodo(todo.id)}
-                        toggleChecked={() => { toggleChecked(todo) }} />
-                )
-
-                )}
-                <TodoForm addTodo={addTodo} />
-            </List>
+            <Box sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                alignItems: "center",
+                m: 3,
+            }}>
+                <Typography variant="h2" component="h1" sx={{ flexGrow: 1 }}>
+                    Todos
+                </Typography>
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {todos.map((todo) => (
+                        <TodoItem todo={todo}
+                            key={todo.id}
+                            removeTodo={() => removeTodo(todo.id)}
+                            toggleChecked={() => { toggleChecked(todo) }} />
+                    )
+                    )}
+                    <TodoForm addTodo={addTodo} />
+                </List>
+            </Box>
         </>
     )
 }
