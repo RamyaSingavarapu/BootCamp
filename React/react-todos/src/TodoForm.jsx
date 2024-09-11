@@ -19,7 +19,7 @@ export default function TodoForm({ addTodo }) {
     return (
         <ListItem>
             <form onSubmit={handleSubmit}>
-                <TextField id="outlined-basic" label="Outlined" variant="outlined" value={text} onChange={handleChange} InputProps={{
+                <TextField id="outlined-basic" label="Add Todo" variant="outlined" value={text} onChange={handleChange} InputProps={{
                     endAdornment: (< InputAdornment position="end" >
                         <IconButton
                             aria-label="toggle password visibility" type="submit"
